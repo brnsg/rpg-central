@@ -4,3 +4,5 @@ node_modules
 *.bat
 Arquivos Desnecessários/
 Credenciais_Admin.txt
+*.db
+render.yaml

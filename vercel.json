@@ -1,5 +1,11 @@
 {
   "version": 2,
+  "framework": null,
+  "functions": {
+    "api/index.js": {
+      "includeFiles": "{index.html,RPG.png,avatar_padrao.svg,guerreiro_exemplo.png,css/**,js/**,abas/**}"
+    }
+  },
   "rewrites": [
     {
       "source": "/api/(.*)",

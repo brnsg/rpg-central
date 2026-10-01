@@ -20,10 +20,20 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 // Servir arquivos estáticos da aplicação (HTML, CSS, Imagens, JS)
-app.use(express.static(__dirname));
+const baseDir = __dirname;
+const cwdDir = process.cwd();
+app.use(express.static(baseDir));
+app.use(express.static(cwdDir));
+app.use('/css', express.static(path.join(baseDir, 'css')));
+app.use('/css', express.static(path.join(cwdDir, 'css')));
+app.use('/abas', express.static(path.join(baseDir, 'abas')));
+app.use('/abas', express.static(path.join(cwdDir, 'abas')));
+app.use('/js', express.static(path.join(baseDir, 'js')));
+app.use('/js', express.static(path.join(cwdDir, 'js')));
 
 app.get('/', async (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    const file = fs.existsSync(path.join(baseDir, 'index.html')) ? path.join(baseDir, 'index.html') : path.join(cwdDir, 'index.html');
+    res.sendFile(file);
 });
 
 // ==========================================
