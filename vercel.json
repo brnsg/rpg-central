@@ -1,15 +1,9 @@
 {
   "version": 2,
-  "framework": null,
-  "functions": {
-    "api/index.js": {
-      "includeFiles": "{index.html,RPG.png,avatar_padrao.svg,guerreiro_exemplo.png,css/**,js/**,abas/**,rpg_central.db}"
-    }
-  },
   "rewrites": [
     {
       "source": "/api/(.*)",
-      "destination": "/api/index.js"
+      "destination": "https://rpg-central.onrender.com/api/$1"
     }
   ]
 }

@@ -1,8 +1,9 @@
 // js/api.js - Camada de Serviços, Sessão e Comunicação REST do RPG Central
-// Suporte transparente para backend no Render, Vercel ou Localhost
-const API_BASE = (typeof window !== 'undefined' && (window.RENDER_API_URL || localStorage.getItem('RENDER_API_URL') || localStorage.getItem('RENDER_BACKEND_URL')))
-    ? (window.RENDER_API_URL || localStorage.getItem('RENDER_API_URL') || localStorage.getItem('RENDER_BACKEND_URL')).replace(/\/$/, '')
-    : '';
+// Backend oficial hospedado no Render conectado ao Neon PostgreSQL
+const BACKEND_RENDER_URL = 'https://rpg-central.onrender.com';
+const API_BASE = (typeof window !== 'undefined' && (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'))
+    ? ''
+    : (window.RENDER_API_URL || localStorage.getItem('RENDER_API_URL') || BACKEND_RENDER_URL).replace(/\/$/, '');
 
 // Gerenciamento de Sessão do Cliente (Requisito 5: UUID salvo em localStorage)
 const AuthService = {
