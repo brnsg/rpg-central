@@ -1,0 +1,255 @@
+/* style_admin.css - Estilo do Painel Administrativo e Dashboard (Requisitos 8, 9, 10, 11) */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    background: #061523;
+    color: white;
+}
+
+/* Header Admin */
+.admin-navbar {
+    background: linear-gradient(90deg, #091a2b 0%, #0c2842 100%);
+    border-bottom: 2px solid #004887;
+    padding: 12px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.admin-logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.admin-logo img {
+    height: 40px;
+}
+
+.admin-logo span {
+    font-size: 20px;
+    font-weight: 700;
+    color: white;
+}
+
+.admin-logo span strong {
+    color: #80D0FF;
+}
+
+.admin-user-info {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-size: 15px;
+    color: #cbd5e1;
+}
+
+/* Layout Principal */
+.admin-main-wrapper {
+    display: flex;
+    min-height: calc(100vh - 65px);
+}
+
+/* Sidebar */
+.admin-sidebar {
+    width: 250px;
+    background: #091a2b;
+    border-right: 1px solid #004887;
+    padding: 25px 0;
+    flex-shrink: 0;
+}
+
+.admin-menu {
+    list-style: none;
+}
+
+.admin-menu li a {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 14px 25px;
+    color: #cbd5e1;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    border-left: 4px solid transparent;
+}
+
+.admin-menu li a:hover,
+.admin-menu li a.active {
+    background: rgba(0, 72, 135, 0.4);
+    color: #80D0FF;
+    border-left-color: #80D0FF;
+}
+
+/* Conteúdo Principal */
+.admin-content-area {
+    flex: 1;
+    padding: 30px;
+    overflow-y: auto;
+}
+
+.secao-admin {
+    display: none;
+}
+
+.secao-admin.ativa {
+    display: block;
+}
+
+.secao-titulo {
+    font-size: 26px;
+    color: white;
+    font-weight: 700;
+    margin-bottom: 25px;
+}
+
+/* Cards de Contadores Superiores (Requisito 9) */
+.grid-cards-metricas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.card-metrica {
+    background: #0b1e30;
+    border: 1px solid #1a3c5e;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.card-metrica::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 4px;
+}
+
+.card-metrica.azul::before { background: #38bdf8; }
+.card-metrica.rosa::before { background: #f43f5e; }
+.card-metrica.verde::before { background: #10b981; }
+.card-metrica.ouro::before { background: #eab308; }
+
+.card-metrica-numero {
+    font-size: 38px;
+    font-weight: 800;
+    color: white;
+    margin-bottom: 5px;
+}
+
+.card-metrica-rotulo {
+    font-size: 14px;
+    color: #94a3b8;
+    font-weight: 600;
+}
+
+/* Gráficos de Visão Geral (Requisito 9) */
+.grid-graficos {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+    gap: 25px;
+    margin-bottom: 35px;
+}
+
+.card-grafico {
+    background: #0b1e30;
+    border: 1px solid #1a3c5e;
+    border-radius: 14px;
+    padding: 25px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.card-grafico h3 {
+    font-size: 18px;
+    color: #80D0FF;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* Tabelas Administrativas */
+.tabela-admin-container {
+    background: #0b1e30;
+    border: 1px solid #1a3c5e;
+    border-radius: 14px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+}
+
+.tabela-admin {
+    width: 100%;
+    border-collapse: collapse;
+    text-align: left;
+}
+
+.tabela-admin th {
+    background: #081726;
+    color: #80D0FF;
+    padding: 16px 20px;
+    font-size: 13.5px;
+    text-transform: uppercase;
+    font-weight: 700;
+    border-bottom: 2px solid #1a3c5e;
+}
+
+.tabela-admin td {
+    padding: 16px 20px;
+    border-bottom: 1px solid #152e47;
+    font-size: 14px;
+    vertical-align: middle;
+}
+
+.tabela-admin tr:hover td {
+    background: rgba(0, 72, 135, 0.2);
+}
+
+.foto-item-admin {
+    width: 75px;
+    height: 85px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid #1a3c5e;
+}
+
+/* Botões de Ações */
+.btn-estrela-destaque {
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.btn-estrela-destaque:hover {
+    transform: scale(1.2);
+}
+
+.btn-acao-admin {
+    background: transparent;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 4px 8px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
+.btn-acao-admin:hover {
+    transform: scale(1.15);
+}
+
+.btn-acao-admin.aceitar:hover { color: #10b981; }
+.btn-acao-admin.recusar:hover { color: #ef4444; }
+.btn-acao-admin.responder:hover { color: #38bdf8; }

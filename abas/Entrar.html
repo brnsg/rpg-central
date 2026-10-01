@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <link rel="stylesheet" href="css/style_entrar.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG Central - Entrar na Conta</title>
+</head>
+<body>
+    <div class="cabecalho">
+        <header>
+            <div class="logo">
+                <a href="../index.html"><img src="../RPG.png" alt="RPG Central Logo"></a>
+            </div>
+            <div class="botoes__menu">
+                <ul>
+                    <li>
+                        <a href="Sistemas.html">Sistemas</a>
+                        <a href="Campanhas.html">Campanhas</a>
+                        <a href="Personagens.html">Personagens</a>
+                        <a href="Resumos.html">Resumos</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="login__registro">
+                <button class="entrar"><a href="Entrar.html">Entrar</a></button>
+                <button class="registrar"><a href="Registrar.html">Registrar</a></button>
+            </div>
+        </header>
+    </div>
+
+    <main class="auth-container">
+        <h2>Dados de Acesso do Cliente</h2>
+
+        <form id="form-login-cliente">
+            <div class="form-auth-grupo">
+                <label for="login-email">Seu e-mail</label>
+                <input type="email" id="login-email" placeholder="Insira seu e-mail" required>
+            </div>
+
+            <div class="form-auth-grupo">
+                <label for="login-senha">Senha de Acesso</label>
+                <input type="password" id="login-senha" placeholder="Insira sua senha" required>
+            </div>
+
+            <div class="auth-opcoes">
+                <label>
+                    <input type="checkbox" id="manter-conectado" checked>
+                    Manter Conectado
+                </label>
+                <a href="#" onclick="alert('Instruções de redefinição enviadas para seu e-mail cadastrado.')">Esqueceu sua senha?</a>
+            </div>
+
+            <button type="submit" class="btn-auth-submit">Entrar</button>
+        </form>
+
+        <div class="auth-rodape">
+            Ainda não possui conta? <a href="Registrar.html">Cadastre-se</a>
+        </div>
+
+        <div style="margin-top: 20px; padding: 12px 16px; border-radius: 10px; background: rgba(0, 35, 70, 0.6); border: 1px solid rgba(128, 208, 255, 0.4); text-align: center; font-size: 13.5px; color: #cbd5e1;">
+            🛡️ <strong>Área de Administração:</strong> Administradores podem entrar diretamente acima ou acessar o <a href="Admin_Login.html" style="color: #ffd700; font-weight: bold; text-decoration: underline;">Painel Administrativo Restrito</a>.
+        </div>
+    </main>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <link rel="stylesheet" href="css/style_loja_de_moedas.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG Central - Tesouraria de Moedas</title>
+</head>
+<body>
+    <div class="cabecalho">
+        <header>
+            <div class="logo">
+                <a href="../index.html"><img src="../RPG.png" alt="RPG Central Logo"></a>
+            </div>
+            <div class="botoes__menu">
+                <ul>
+                    <li>
+                        <a href="Sistemas.html">Sistemas</a>
+                        <a href="Campanhas.html">Campanhas</a>
+                        <a href="Personagens.html">Personagens</a>
+                        <a href="Resumos.html">Resumos</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="login__registro">
+                <button class="entrar"><a href="Entrar.html">Entrar</a></button>
+                <button class="registrar"><a href="Registrar.html">Registrar</a></button>
+            </div>
+        </header>
+    </div>
+
+    <main class="loja-container">
+        <div class="loja-banner">
+            <h2>Tesouraria Oficial: <span>Moedas Virtuais</span></h2>
+            <p>Adquira saldo para desbloquear sistemas de regras oficiais na loja e criar campanhas épicas</p>
+            <div class="saldo-destaque">
+                <span>Seu Saldo Atual:</span>
+                🪙 <strong id="saldo-atual-loja">0.00</strong> Moedas
+            </div>
+        </div>
+
+        <div class="grid-pacotes">
+            <!-- Pacote Cobre -->
+            <div class="card-pacote">
+                <div>
+                    <div class="pacote-icone">🥉</div>
+                    <div class="pacote-nome">Bolsa de Cobre</div>
+                    <div class="pacote-moedas">100 Moedas</div>
+                    <div class="pacote-preco">R$ 15,00</div>
+                </div>
+                <button class="btn-comprar-pacote" onclick="comprarPacote(100, 15.00, 'Bolsa de Cobre')">Recarregar</button>
+            </div>
+
+            <!-- Pacote Prata (Popular) -->
+            <div class="card-pacote popular">
+                <span class="tag-popular">MAIS POPULAR</span>
+                <div>
+                    <div class="pacote-icone">🥈</div>
+                    <div class="pacote-nome">Baú de Prata</div>
+                    <div class="pacote-moedas">250 Moedas</div>
+                    <div class="pacote-preco">R$ 30,00</div>
+                </div>
+                <button class="btn-comprar-pacote" style="background: #ffd700;" onclick="comprarPacote(250, 30.00, 'Baú de Prata')">Recarregar</button>
+            </div>
+
+            <!-- Pacote Ouro -->
+            <div class="card-pacote">
+                <div>
+                    <div class="pacote-icone">🥇</div>
+                    <div class="pacote-nome">Cofre de Ouro</div>
+                    <div class="pacote-moedas">500 Moedas</div>
+                    <div class="pacote-preco">R$ 55,00</div>
+                </div>
+                <button class="btn-comprar-pacote" onclick="comprarPacote(500, 55.00, 'Cofre de Ouro')">Recarregar</button>
+            </div>
+
+            <!-- Pacote Platina -->
+            <div class="card-pacote">
+                <div>
+                    <div class="pacote-icone">💎</div>
+                    <div class="pacote-nome">Tesouro de Platina</div>
+                    <div class="pacote-moedas">1000 Moedas</div>
+                    <div class="pacote-preco">R$ 99,00</div>
+                </div>
+                <button class="btn-comprar-pacote" onclick="comprarPacote(1000, 99.00, 'Tesouro de Platina')">Recarregar</button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="../js/api.js"></script>
+    <script src="../js/moedas.js"></script>
+</body>
+</html>

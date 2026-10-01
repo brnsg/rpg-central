@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <link rel="stylesheet" href="css/style_sistemas.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG Central - Catálogo de Sistemas</title>
+</head>
+<body>
+    <!-- Cabeçalho -->
+    <div class="cabecalho">
+        <header>
+            <div class="logo">
+                <a href="../index.html"><img src="../RPG.png" alt="RPG Central Logo"></a>
+            </div>
+            <div class="botoes__menu">
+                <ul>
+                    <li>
+                        <a href="Sistemas.html" class="active">Sistemas</a>
+                        <a href="Campanhas.html">Campanhas</a>
+                        <a href="Personagens.html">Personagens</a>
+                        <a href="Resumos.html">Resumos</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="login__registro">
+                <button class="entrar"><a href="Entrar.html">Entrar</a></button>
+                <button class="registrar"><a href="Registrar.html">Registrar</a></button>
+            </div>
+        </header>
+    </div>
+
+    <!-- Moedas do Jogador -->
+    <div class="moedas">
+        <h1>Moedas Virtuais:</h1>
+        <div class="quantidade_moedas">
+            <span id="moedas_usuario">0.00</span>
+        </div>
+        <button class="comprar"><a href="Loja_de_moedas.html">Comprar mais moedas</a></button>
+    </div>
+
+    <!-- Conteúdo Principal -->
+    <main class="catalogo-container">
+        <div class="catalogo-topo">
+            <div class="catalogo-titulo">
+                <h2>Catálogo de <span style="color: #80D0FF;">Sistemas de RPG</span></h2>
+                <p>Adquira livros de regras com suas moedas e desbloqueie-os para criar suas campanhas</p>
+            </div>
+
+            <div class="catalogo-filtros">
+                <input type="text" id="input-busca" placeholder="Filtrar por nome ou termo...">
+                <select id="select-genero">
+                    <option value="Todos">Todos os Gêneros</option>
+                    <option value="Fantasia Medieval Heroica">Fantasia Medieval</option>
+                    <option value="Alta Fantasia">Alta Fantasia</option>
+                    <option value="Terror Cósmico & Investigação">Terror Cósmico</option>
+                    <option value="Investigação & Terror Moderno">Terror Moderno</option>
+                    <option value="Ficção Científica Distópica">Cyberpunk / Sci-Fi</option>
+                    <option value="Horror Pessoal & Política">Horror Pessoal / Vampiro</option>
+                </select>
+                <button class="btn-filtro" id="btn-busca">Filtrar</button>
+                <button class="btn-destaques-toggle" id="btn-destaques">Destaques</button>
+                <button class="btn-meus-sistemas" id="btn-meus-sistemas">Meus Sistemas</button>
+                <button class="btn-destaques-toggle" id="btn-minhas-propostas" onclick="abrirModalMinhasPropostas()" style="background: rgba(2, 132, 199, 0.25); border: 1px solid #0284c7; color: #80D0FF; font-weight: bold; cursor: pointer;">📋 Minhas Propostas</button>
+            </div>
+        </div>
+
+        <!-- Grade de Sistemas -->
+        <div class="grid-sistemas" id="grid-sistemas-catalogo">
+            <!-- Preenchido via JavaScript -->
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="../js/api.js"></script>
+    <script src="../js/main.js"></script>
+    <script src="../js/sistemas.js"></script>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <link rel="stylesheet" href="css/style_registar.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG Central - Cadastro de Novo Jogador</title>
+</head>
+<body>
+    <div class="cabecalho">
+        <header>
+            <div class="logo">
+                <a href="../index.html"><img src="../RPG.png" alt="RPG Central Logo"></a>
+            </div>
+            <div class="botoes__menu">
+                <ul>
+                    <li>
+                        <a href="Sistemas.html">Sistemas</a>
+                        <a href="Campanhas.html">Campanhas</a>
+                        <a href="Personagens.html">Personagens</a>
+                        <a href="Resumos.html">Resumos</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="login__registro">
+                <button class="entrar"><a href="Entrar.html">Entrar</a></button>
+                <button class="registrar"><a href="Registrar.html">Registrar</a></button>
+            </div>
+        </header>
+    </div>
+
+    <main class="auth-container">
+        <h2>Criar Conta no RPG Central</h2>
+
+        <form id="form-registro-cliente">
+            <div class="form-auth-grupo">
+                <label for="reg-nome">Nome de Usuário / Mestre *</label>
+                <input type="text" id="reg-nome" placeholder="Insira seu nome de usuário" required>
+            </div>
+
+            <div class="form-auth-grupo">
+                <label for="reg-email">E-mail de Acesso *</label>
+                <input type="email" id="reg-email" placeholder="Insira seu e-mail" required>
+            </div>
+
+            <div class="form-auth-grupo">
+                <label for="reg-senha">Senha de Acesso *</label>
+                <input type="password" id="reg-senha" placeholder="Insira sua senha" required>
+            </div>
+
+            <div class="form-auth-grupo">
+                <label for="reg-cidade">Cidade *</label>
+                <input type="text" id="reg-cidade" placeholder="Insira sua cidade" required>
+            </div>
+
+            <div class="form-auth-grupo">
+                <label for="reg-foto">Foto de Perfil (URL Opcional)</label>
+                <input type="url" id="reg-foto" placeholder="Insira a URL da foto de perfil (opcional)">
+            </div>
+
+            <button type="submit" class="btn-auth-submit">Criar Minha Conta (Ganhe 250 Moedas)</button>
+        </form>
+
+        <div class="auth-rodape">
+            Já tem uma conta? <a href="Entrar.html">Fazer Login</a>
+        </div>
+    </main>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/auth.js"></script>
+</body>
+</html>

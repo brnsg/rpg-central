@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <link rel="stylesheet" href="css/style_personagens.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG Central - Meus Personagens</title>
+</head>
+<body>
+    <!-- Cabeçalho -->
+    <div class="cabecalho">
+        <header>
+            <div class="logo">
+                <a href="../index.html"><img src="../RPG.png" alt="RPG Central Logo"></a>
+            </div>
+            <div class="botoes__menu">
+                <ul>
+                    <li>
+                        <a href="Sistemas.html">Sistemas</a>
+                        <a href="Campanhas.html">Campanhas</a>
+                        <a href="Personagens.html" class="active">Personagens</a>
+                        <a href="Resumos.html">Resumos</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="login__registro">
+                <button class="entrar"><a href="Entrar.html">Entrar</a></button>
+                <button class="registrar"><a href="Registrar.html">Registrar</a></button>
+            </div>
+        </header>
+    </div>
+
+    <!-- Área Principal de Personagens -->
+    <main class="personagens-container">
+        <!-- Topo da Página: Título, Filtro e Botão de Criar -->
+        <div class="personagens-topo">
+            <div>
+                <h2 style="font-size: 28px; color: white;">Meus <span style="color: #80D0FF;">Personagens</span></h2>
+                <p style="color: #c3eeff; font-size: 15px; margin-top: 4px;">Crie, visualize e gerencie seus heróis para qualquer sistema de RPG sem limites de slots</p>
+            </div>
+            <div style="display: flex; gap: 15px; align-items: center; flex-wrap: wrap;">
+                <input type="text" id="input-busca-personagem" placeholder="Buscar por herói ou classe..." style="padding: 11px 16px; background: rgba(0, 20, 40, 0.85); border: 1px solid #004887; border-radius: 8px; color: white; font-size: 14px; min-width: 230px; outline: none;">
+                <button class="btn-novo-heroi" id="btn-novo-personagem">+ Criar Novo Personagem</button>
+            </div>
+        </div>
+
+        <!-- Grade Infinita de Personagens -->
+        <div class="grid-personagens-infinito" id="grid-personagens">
+            <!-- Injetado dinamicamente via JS -->
+        </div>
+    </main>
+
+    <!-- Modal Novo Personagem -->
+    <div class="modal-overlay" id="modal-novo-personagem">
+        <div class="modal-card">
+            <button class="modal-fechar" onclick="fecharModalNovoPersonagem()">&times;</button>
+            <h2 class="modal-titulo">+ Criar Novo Personagem</h2>
+
+            <!-- PAINEL DE CRIAÇÃO COM IA GENERATIVA (GOOGLE GEMINI) -->
+            <div style="background: linear-gradient(135deg, rgba(124, 58, 237, 0.25) 0%, rgba(37, 99, 235, 0.25) 100%); border: 1.5px solid #818cf8; border-radius: 12px; padding: 14px; margin-bottom: 18px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 8px;">
+                    <div>
+                        <h4 style="margin: 0; color: #c4b5fd; font-size: 14px; display: flex; align-items: center; gap: 6px;">
+                            <span>✨</span> Gerar Personagem com Inteligência Artificial
+                        </h4>
+                        <p style="margin: 3px 0 0 0; font-size: 11.5px; color: #cbd5e1;">A IA cria nome, classe/raça, nível equilibrado e histórico completo!</p>
+                    </div>
+                    <button type="button" id="btn-ia-gerar-personagem" onclick="gerarPersonagemComIA()" style="
+                        background: linear-gradient(135deg, #7c3aed 0%, #2563eb 100%); color: white; border: none; border-radius: 8px; padding: 8px 16px; font-size: 12.5px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 12px rgba(124, 58, 237, 0.4); display: flex; align-items: center; gap: 6px;
+                    ">
+                        🎲 Gerar com IA
+                    </button>
+                </div>
+                <div>
+                    <input type="text" id="p-ia-ideia-opcional" placeholder="Conceito opcional (ex: 'Paladino vingador' ou deixe vazio)" style="width: 100%; padding: 7px 10px; background: rgba(0, 15, 30, 0.9); border: 1px solid #4338ca; border-radius: 6px; color: white; font-size: 12px;">
+                </div>
+                <div id="p-ia-status" style="display: none; color: #ffd700; font-size: 12px; margin-top: 8px;">
+                    ⏳ A Inteligência Artificial está criando seu personagem...
+                </div>
+            </div>
+
+            <form onsubmit="salvarNovoPersonagem(event)">
+                <div class="form-grupo">
+                    <label>Nome do Personagem *</label>
+                    <input type="text" id="form-p-nome" placeholder="Insira o nome do personagem" required>
+                </div>
+                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 15px;">
+                    <div class="form-grupo">
+                        <label>Classe e Raça *</label>
+                        <input type="text" id="form-p-classe" placeholder="Ex: Guerreiro Humano, Mago Elfo" required>
+                    </div>
+                    <div class="form-grupo">
+                        <label>Nível</label>
+                        <input type="number" id="form-p-nivel" value="1" min="1" max="20" placeholder="Insira o nível">
+                    </div>
+                </div>
+
+
+
+                <!-- Duas Imagens: Foto/Ícone do Card + Arte da Ficha -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div class="form-grupo">
+                        <label>Foto do Card (Avatar)</label>
+                        <input type="url" id="form-p-avatar" placeholder="URL da foto circular (opcional)">
+                    </div>
+                    <div class="form-grupo">
+                        <label>Arte da Ficha (Grande)</label>
+                        <input type="url" id="form-p-arte" placeholder="URL da arte do herói (opcional)">
+                    </div>
+                </div>
+
+                <div class="form-grupo">
+                    <label>Biografia / Descrição do Herói</label>
+                    <textarea id="form-p-descricao" rows="3" placeholder="Insira a história, antecedentes e personalidade"></textarea>
+                </div>
+
+                <div class="form-grupo">
+                    <label>Link da Ficha Completa (Google Drive / PDF / Nuvem)</label>
+                    <input type="url" id="form-p-pdf" placeholder="https://drive.google.com/file/d/... ou link do PDF">
+                    <small style="color: #80D0FF; font-size: 12.5px; margin-top: 4px; display: block;">
+                        Faça upload da ficha do seu herói no Google Drive ou outro serviço e cole o link aqui para acessá-la pelo RPG Central.
+                    </small>
+                </div>
+
+                <button type="submit" class="btn-submit-modal">Salvar e Criar Personagem</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Editar Personagem -->
+    <div class="modal-overlay" id="modal-editar-personagem">
+        <div class="modal-card">
+            <button class="modal-fechar" onclick="fecharModalEditarPersonagem()">&times;</button>
+            <h2 class="modal-titulo">Editar Personagem</h2>
+            <form onsubmit="salvarEdicaoPersonagem(event)">
+                <input type="hidden" id="edit-p-id">
+                <div class="form-grupo">
+                    <label>Nome do Personagem *</label>
+                    <input type="text" id="edit-p-nome" placeholder="Insira o nome do personagem" required>
+                </div>
+                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 15px;">
+                    <div class="form-grupo">
+                        <label>Classe e Raça *</label>
+                        <input type="text" id="edit-p-classe" placeholder="Ex: Ladino Meio-Elfo" required>
+                    </div>
+                    <div class="form-grupo">
+                        <label>Nível</label>
+                        <input type="number" id="edit-p-nivel" min="1" max="20" placeholder="Insira o nível">
+                    </div>
+                </div>
+
+
+
+                <!-- Duas Imagens na Edição -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div class="form-grupo">
+                        <label>Foto do Card (Avatar)</label>
+                        <input type="url" id="edit-p-avatar" placeholder="URL da foto circular (opcional)">
+                    </div>
+                    <div class="form-grupo">
+                        <label>Arte da Ficha (Grande)</label>
+                        <input type="url" id="edit-p-arte" placeholder="URL da arte do herói (opcional)">
+                    </div>
+                </div>
+
+                <div class="form-grupo">
+                    <label>Biografia / Descrição do Herói</label>
+                    <textarea id="edit-p-descricao" rows="3" placeholder="Insira a história, antecedentes e personalidade"></textarea>
+                </div>
+
+                <div class="form-grupo">
+                    <label>Link da Ficha Completa (Google Drive / PDF / Nuvem)</label>
+                    <input type="url" id="edit-p-pdf" placeholder="https://drive.google.com/file/d/... ou link do PDF">
+                    <small style="color: #80D0FF; font-size: 12.5px; margin-top: 4px; display: block;">
+                        Cole o link de acesso da sua ficha hospedada no Google Drive ou na nuvem para acessá-la pelo portal.
+                    </small>
+                </div>
+
+                <button type="submit" class="btn-submit-modal">Salvar Alterações</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Ficha Completa -->
+    <div class="modal-overlay" id="modal-ficha-completa">
+        <div class="modal-card modal-ficha-card">
+            <button class="modal-fechar" onclick="fecharModalFicha()">&times;</button>
+            <div class="ficha-cabecalho">
+                <img id="ficha-arte" class="ficha-img" src="../avatar_padrao.svg" alt="Arte">
+                <div class="ficha-titulos">
+                    <h2 id="ficha-nome">Personagem</h2>
+                    <p id="ficha-classe">Classe e Raça</p>
+                    <span id="ficha-nivel" class="badge-nivel-ficha">Nível 1</span>
+                </div>
+            </div>
+
+
+
+            <div class="ficha-desc-container">
+                <div class="ficha-desc-title">Histórico e Características:</div>
+                <p id="ficha-desc"></p>
+            </div>
+
+            <!-- Botão de Acesso à Ficha no Google Drive / PDF -->
+            <div id="ficha-link-box" style="margin-bottom: 20px;">
+                <!-- Preenchido via JavaScript -->
+            </div>
+
+            <div class="ficha-rodape-acoes">
+                <button onclick="window.print()" class="btn-submit-modal" style="margin-top: 0;">Exportar / Imprimir Ficha</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/api.js"></script>
+    <script src="../js/personagens.js"></script>
+</body>
+</html>

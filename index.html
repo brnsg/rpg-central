@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG Central - Sua Plataforma de RPG de Mesa</title>
+</head>
+<body>
+    <div class="cabecalho">
+        <header>
+            <div class="logo">
+                <a href="index.html"><img src="RPG.png" alt="RPG Central Logo"></a>
+            </div>
+            <div class="botoes__menu">
+                <ul>
+                    <li>
+                        <a href="abas/Sistemas.html">Sistemas</a>
+                        <a href="abas/Campanhas.html">Campanhas</a>
+                        <a href="abas/Personagens.html">Personagens</a>
+                        <a href="abas/Resumos.html">Resumos</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="login__registro">
+                <button class="entrar" onclick="window.location.href='abas/Entrar.html'"><a href="abas/Entrar.html">Entrar</a></button>
+                <button class="registrar" onclick="window.location.href='abas/Registrar.html'"><a href="abas/Registrar.html">Registrar</a></button>
+            </div>
+        </header>
+    </div>
+
+    <!-- Seção de Boas-vindas -->
+    <section class="mensagemdeboasvindas">
+        <h1 id="titulo">Seja Bem-vindo ao <span> RPG Central! </span></h1>
+        <h3 id="subtitulo">Explore o mundo da imaginação, aventure-se e gerencie suas campanhas</h3>
+        <div class="boasvindas__botoes">
+            <button class="entrar" onclick="window.location.href='abas/Entrar.html'"><a href="abas/Entrar.html">Entrar</a></button>
+            <button class="registrar" onclick="window.location.href='abas/Registrar.html'"><a href="abas/Registrar.html">Registrar</a></button>
+        </div>
+    </section>
+
+    <!-- Barra de Saldo de Moedas Virtuais -->
+    <div class="moedas">
+        <h1>Moedas Virtuais:</h1>
+        <div class="quantidade_moedas">
+            <span id="moedas_usuario">0.00</span>
+        </div>
+        <button class="comprar"><a href="abas/Loja_de_moedas.html">Comprar mais moedas</a></button>
+    </div>
+
+    <!-- Seção de Rolagem de Dados Interativa -->
+    <section class="secao__rolagemdedados">
+        <div class="rolagemdedados__botoes">
+            <button class="d20"><a href="#rolar">d20</a></button>
+            <button class="d12"><a href="#rolar">d12</a></button>
+            <button class="d10"><a href="#rolar">d10</a></button>
+            <button class="d8"><a href="#rolar">d8</a></button>
+            <button class="d6"><a href="#rolar">d6</a></button>
+            <button class="d4"><a href="#rolar">d4</a></button>
+        </div>
+        <div class="rolagemdedados__display">
+            <h1 id="resultado">Resultado da Rolagem:</h1>
+            <p id="resultado_numero" style="font-size: 32px; font-weight: bold; color: #80D0FF; min-height: 48px; display: flex; align-items: center; justify-content: center;">Clique em um dado acima para rolar!</p>
+        </div>
+    </section>
+
+    <!-- SEÇÃO PRINCIPAL: VITRINE DE SISTEMAS (REQUISITOS 1, 2, 3 e 6 DO EDITAL) -->
+    <section id="vitrine-sistemas-container" style="max-width: 1200px; margin: 40px auto 60px auto; padding: 0 20px;">
+        <div style="background: linear-gradient(135deg, rgb(25, 28, 29) 0%, rgba(0, 49, 87, 0.95) 100%); border: 1px solid rgb(0, 48, 92); border-radius: 16px; padding: 25px 30px; margin-bottom: 30px; box-shadow: 0 8px 24px rgba(0,0,0,0.3);">
+            <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 20px;">
+                <div>
+                    <h2 style="font-size: 28px; color: white; font-weight: 700;">Sistemas em <span style="color: #80D0FF;">Destaque</span></h2>
+                    <p style="color: rgb(195, 238, 255); font-size: 15px; margin-top: 4px;">Explore os maiores sistemas de RPG, avaliados e enriquecidos com Inteligência Artificial</p>
+                </div>
+
+                <!-- Barra de Pesquisa e Filtros (Requisito 2) -->
+                <div style="display: flex; gap: 12px; align-items: center; flex-wrap: wrap;">
+                    <div style="position: relative;">
+                        <input type="text" id="input-busca-sistema" placeholder="Pesquisar por nome, gênero..." style="
+                            padding: 10px 16px;
+                            width: 280px;
+                            border-radius: 10px;
+                            border: 1px solid #004887;
+                            background: rgba(0, 20, 40, 0.8);
+                            color: white;
+                            font-size: 15px;
+                            outline: none;
+                        ">
+                    </div>
+                    <button id="btn-pesquisar-sistema" style="
+                        padding: 10px 18px;
+                        border: none;
+                        border-radius: 10px;
+                        background: rgb(0, 102, 204);
+                        color: white;
+                        font-weight: 600;
+                        font-size: 15px;
+                        cursor: pointer;
+                        transition: 0.3s ease;
+                    ">Pesquisar</button>
+                    <button id="btn-exibir-destaques" style="
+                        padding: 10px 20px;
+                        border: none;
+                        border-radius: 10px;
+                        background: rgb(146, 228, 255);
+                        color: rgb(0, 30, 60);
+                        font-weight: 700;
+                        font-size: 15px;
+                        cursor: pointer;
+                        transition: 0.3s ease;
+                    ">Exibir Destaques</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Grade de Cards de Sistemas (Requisito 1) -->
+        <div id="grid-sistemas" style="
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+            gap: 25px;
+        ">
+            <!-- Preenchido dinamicamente pelo JavaScript (main.js) -->
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer style="text-align: center; padding: 30px; color: #80D0FF; font-size: 14px; border-top: 1px solid rgb(0, 48, 92); margin-top: 50px;">
+        <p>RPG Central &copy; 2026 - Centro Universitário UniSenac Campus Pelotas</p>
+        <p style="font-size: 12px; color: #a2c4e2; margin-top: 5px;">
+            Desenvolvimento de Aplicações Full Stack | <a href="abas/Admin_Login.html" style="color: #ffd700; text-decoration: none;">Acesso Administrativo</a>
+        </p>
+    </footer>
+
+    <!-- Scripts JavaScript Separados (Passo 3) -->
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

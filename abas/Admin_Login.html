@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <link rel="stylesheet" href="css/style_entrar.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG Central - Acesso Administrativo Restrito</title>
+</head>
+<body>
+    <div class="cabecalho">
+        <header>
+            <div class="logo">
+                <a href="../index.html"><img src="../RPG.png" alt="RPG Central Logo"></a>
+            </div>
+            <div class="botoes__menu">
+                <ul>
+                    <li><a href="../index.html">← Voltar ao Portal</a></li>
+                </ul>
+            </div>
+        </header>
+    </div>
+
+    <main class="auth-container" style="max-width: 450px;">
+        <div style="text-align: center; margin-bottom: 25px;">
+            <div style="font-size: 50px; margin-bottom: 10px;">🛡️</div>
+            <h2 style="font-size: 24px; color: #80D0FF;">Área Restrita: Administração</h2>
+            <p style="color: #cbd5e1; font-size: 14px; margin-top: 4px;">Painel de Moderação, Métricas e Gestão de Propostas</p>
+        </div>
+
+        <form id="form-admin-login">
+            <div class="form-auth-grupo">
+                <label for="admin-email">E-mail do Administrador</label>
+                <input type="email" id="admin-email" value="admin@rpgcentral.com" required>
+            </div>
+
+            <div class="form-auth-grupo">
+                <label for="admin-senha">Senha</label>
+                <input type="password" id="admin-senha" value="admin123" required>
+            </div>
+
+            <button type="submit" class="btn-auth-submit" style="background: #e03131; margin-top: 15px;">
+                Entrar no Painel Admin
+            </button>
+        </form>
+
+        <div style="margin-top: 25px; text-align: center; font-size: 13px; color: #94a3b8; background: rgba(0,20,40,0.5); padding: 10px; border-radius: 8px;">
+            Credenciais padrão: <strong>admin@rpgcentral.com</strong> | <strong>admin123</strong>
+        </div>
+    </main>
+
+    <script src="../js/api.js"></script>
+    <script>
+        document.getElementById('form-admin-login').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('admin-email').value.trim();
+            const senha = document.getElementById('admin-senha').value;
+
+            try {
+                const res = await Api.post('/api/auth/admin/login', { email, senha });
+                AuthService.setAdminUUID(res.admin.uuid);
+                AuthService.setAdminAtual(res.admin);
+                showNotification('Acesso autorizado! Redirecionando para o Dashboard...', 'sucesso');
+                setTimeout(() => window.location.href = 'Admin_Dashboard.html', 800);
+            } catch (err) {
+                showNotification(err.message, 'erro');
+            }
+        });
+    </script>
+</body>
+</html>

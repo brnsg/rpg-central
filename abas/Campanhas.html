@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <link rel="stylesheet" href="css/style_campanhas.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG Central - Campanhas e Mesas</title>
+</head>
+<body>
+    <div class="cabecalho">
+        <header>
+            <div class="logo">
+                <a href="../index.html"><img src="../RPG.png" alt="RPG Central Logo"></a>
+            </div>
+            <div class="botoes__menu">
+                <ul>
+                    <li>
+                        <a href="Sistemas.html">Sistemas</a>
+                        <a href="Campanhas.html" class="active">Campanhas</a>
+                        <a href="Personagens.html">Personagens</a>
+                        <a href="Resumos.html">Resumos</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="login__registro">
+                <button class="entrar"><a href="Entrar.html">Entrar</a></button>
+                <button class="registrar"><a href="Registrar.html">Registrar</a></button>
+            </div>
+        </header>
+    </div>
+
+    <main class="campanhas-container">
+        <div class="campanhas-topo">
+            <div>
+                <h2 style="font-size: 28px; color: white;">Campanhas & <span style="color: #80D0FF;">Mesas Ativas</span></h2>
+                <p style="color: #c3eeff; font-size: 15px; margin-top: 4px;">Acompanhe sagas lendárias, mestres e grupos de aventureiros</p>
+            </div>
+            <button class="btn-nova-campanha" id="btn-nova-campanha">+ Criar Nova Campanha</button>
+        </div>
+
+        <div class="grid-campanhas" id="grid-campanhas">
+            <!-- Preenchido via JavaScript -->
+        </div>
+    </main>
+
+    <!-- Modal Nova Campanha -->
+    <div id="modal-nova-campanha" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 15, 30, 0.85); backdrop-filter: blur(8px); z-index: 10000; align-items: center; justify-content: center; padding: 20px;">
+        <div style="background: linear-gradient(135deg, rgb(25, 28, 29) 0%, rgba(0, 49, 87, 0.98) 100%); border: 1px solid #80D0FF; border-radius: 16px; max-width: 600px; width: 100%; padding: 30px; color: white; position: relative;">
+            <button onclick="fecharModalNovaCampanha()" style="position: absolute; top: 15px; right: 18px; background: transparent; border: none; color: #80D0FF; font-size: 26px; cursor: pointer;">&times;</button>
+            <h2 style="color: #80D0FF; margin-bottom: 20px;">+ Fundar Nova Campanha de RPG</h2>
+
+            <!-- PAINEL DE CRIAÇÃO COM IA GENERATIVA (GOOGLE GEMINI) -->
+            <div style="background: linear-gradient(135deg, rgba(124, 58, 237, 0.25) 0%, rgba(37, 99, 235, 0.25) 100%); border: 1.5px solid #818cf8; border-radius: 12px; padding: 14px; margin-bottom: 18px;">
+                <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; margin-bottom: 8px;">
+                    <div>
+                        <h4 style="margin: 0; color: #c4b5fd; font-size: 14px; display: flex; align-items: center; gap: 6px;">
+                            <span>✨</span> Gerar Campanha com Inteligência Artificial
+                        </h4>
+                        <p style="margin: 3px 0 0 0; font-size: 11.5px; color: #cbd5e1;">A IA cria o título, enredo, gancho de aventura e imagem temática!</p>
+                    </div>
+                    <button type="button" id="btn-ia-gerar-campanha" onclick="gerarCampanhaComIA()" style="
+                        background: linear-gradient(135deg, #7c3aed 0%, #2563eb 100%); color: white; border: none; border-radius: 8px; padding: 8px 16px; font-size: 12.5px; font-weight: bold; cursor: pointer; box-shadow: 0 4px 12px rgba(124, 58, 237, 0.4); display: flex; align-items: center; gap: 6px;
+                    ">
+                        🎲 Gerar com IA
+                    </button>
+                </div>
+                <div>
+                    <input type="text" id="camp-ia-tema-opcional" placeholder="Tema ou estilo opcional (ex: 'Investigação sobrenatural vitoriana' ou deixe vazio)" style="width: 100%; padding: 7px 10px; background: rgba(0, 15, 30, 0.9); border: 1px solid #4338ca; border-radius: 6px; color: white; font-size: 12px;">
+                </div>
+                <div id="camp-ia-status" style="display: none; color: #ffd700; font-size: 12px; margin-top: 8px;">
+                    ⏳ A Inteligência Artificial está forjando uma campanha épica...
+                </div>
+            </div>
+
+            <form onsubmit="salvarNovaCampanha(event)">
+                <div style="margin-bottom: 14px;">
+                    <label style="display: block; font-size: 14px; color: #80D0FF; margin-bottom: 5px;">Título da Campanha *</label>
+                    <input type="text" id="camp-titulo" placeholder="Insira o título da campanha" required style="width: 100%; padding: 10px; background: rgba(0,20,40,0.9); border: 1px solid #004887; border-radius: 8px; color: white;">
+                </div>
+                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 15px; margin-bottom: 14px;">
+                    <div>
+                        <label style="display: block; font-size: 14px; color: #80D0FF; margin-bottom: 5px;">Sistema Vinculado *</label>
+                        <select id="camp-sistema-id" required style="width: 100%; padding: 10px; background: rgba(0,20,40,0.9); border: 1px solid #004887; border-radius: 8px; color: white;">
+                            <!-- Preenchido dinamicamente com sistemas adquiridos e Sistema Personalizado -->
+                        </select>
+                        <div id="aviso-sistemas-campanha"></div>
+                    </div>
+                    <div>
+                        <label style="display: block; font-size: 14px; color: #80D0FF; margin-bottom: 5px;">Visibilidade</label>
+                        <select id="camp-visibilidade" style="width: 100%; padding: 10px; background: rgba(0,20,40,0.9); border: 1px solid #004887; border-radius: 8px; color: white;">
+                            <option value="publica">Pública</option>
+                            <option value="privada">Privada</option>
+                        </select>
+                    </div>
+                </div>
+                <div style="margin-bottom: 14px;">
+                    <label style="display: block; font-size: 14px; color: #80D0FF; margin-bottom: 5px;">Sinopse e Premissa *</label>
+                    <textarea id="camp-sinopse" rows="4" placeholder="Insira a sinopse e premissa da história..." required style="width: 100%; padding: 10px; background: rgba(0,20,40,0.9); border: 1px solid #004887; border-radius: 8px; color: white;"></textarea>
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; font-size: 14px; color: #80D0FF; margin-bottom: 5px;">URL da Imagem de Capa (Opcional)</label>
+                    <input type="url" id="camp-capa" placeholder="Insira a URL da imagem de capa (opcional)" style="width: 100%; padding: 10px; background: rgba(0,20,40,0.9); border: 1px solid #004887; border-radius: 8px; color: white;">
+                </div>
+                <button type="submit" style="width: 100%; padding: 12px; background: #0284c7; color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 16px; cursor: pointer;">Criar Campanha</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal Editar Campanha -->
+    <div id="modal-editar-campanha" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 15, 30, 0.85); backdrop-filter: blur(8px); z-index: 10000; align-items: center; justify-content: center; padding: 20px;">
+        <div style="background: linear-gradient(135deg, rgb(25, 28, 29) 0%, rgba(0, 49, 87, 0.98) 100%); border: 1px solid #80D0FF; border-radius: 16px; max-width: 600px; width: 100%; padding: 30px; color: white; position: relative;">
+            <button onclick="fecharModalEditarCampanha()" style="position: absolute; top: 15px; right: 18px; background: transparent; border: none; color: #80D0FF; font-size: 26px; cursor: pointer;">&times;</button>
+            <h2 style="color: #80D0FF; margin-bottom: 20px;">✏️ Editar Informações da Campanha</h2>
+            <form onsubmit="salvarEdicaoCampanha(event)">
+                <input type="hidden" id="edit-camp-id">
+                <div style="margin-bottom: 14px;">
+                    <label style="display: block; font-size: 14px; color: #80D0FF; margin-bottom: 5px;">Título da Campanha *</label>
+                    <input type="text" id="edit-camp-titulo" required style="width: 100%; padding: 10px; background: rgba(0,20,40,0.9); border: 1px solid #004887; border-radius: 8px; color: white;">
+                </div>
+                <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 15px; margin-bottom: 14px;">
+                    <div>
+                        <label style="display: block; font-size: 14px; color: #80D0FF; margin-bottom: 5px;">Sistema Vinculado</label>
+                        <select id="edit-camp-sistema-id" style="width: 100%; padding: 10px; background: rgba(0,20,40,0.9); border: 1px solid #004887; border-radius: 8px; color: white;">
+                        </select>
+                    </div>
+                    <div>
+                        <label style="display: block; font-size: 14px; color: #80D0FF; margin-bottom: 5px;">Visibilidade</label>
+                        <select id="edit-camp-visibilidade" style="width: 100%; padding: 10px; background: rgba(0,20,40,0.9); border: 1px solid #004887; border-radius: 8px; color: white;">
+                            <option value="publica">Pública</option>
+                            <option value="privada">Privada</option>
+                        </select>
+                    </div>
+                </div>
+                <div style="margin-bottom: 14px;">
+                    <label style="display: block; font-size: 14px; color: #80D0FF; margin-bottom: 5px;">Sinopse e Premissa *</label>
+                    <textarea id="edit-camp-sinopse" rows="4" required style="width: 100%; padding: 10px; background: rgba(0,20,40,0.9); border: 1px solid #004887; border-radius: 8px; color: white;"></textarea>
+                </div>
+                <div style="margin-bottom: 20px;">
+                    <label style="display: block; font-size: 14px; color: #80D0FF; margin-bottom: 5px;">URL da Imagem de Capa</label>
+                    <input type="url" id="edit-camp-capa" style="width: 100%; padding: 10px; background: rgba(0,20,40,0.9); border: 1px solid #004887; border-radius: 8px; color: white;">
+                </div>
+                <div style="display: flex; gap: 12px;">
+                    <button type="submit" style="flex: 1; padding: 12px; background: #0284c7; color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 16px; cursor: pointer;">Salvar Alterações</button>
+                    <button type="button" onclick="fecharModalEditarCampanha()" style="padding: 12px 20px; background: #334155; color: white; border: none; border-radius: 8px; font-weight: bold; font-size: 16px; cursor: pointer;">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="../js/api.js"></script>
+    <script src="../js/campanhas.js"></script>
+</body>
+</html>

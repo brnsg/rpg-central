@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <link rel="stylesheet" href="css/style_sistemas.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPG Central - Listagem de Minhas Propostas</title>
+    <style>
+        .tabela-propostas-cliente {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            background: rgba(0, 20, 45, 0.7);
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid rgba(128, 208, 255, 0.3);
+        }
+        .tabela-propostas-cliente th {
+            background: rgba(0, 48, 92, 0.9);
+            color: #80D0FF;
+            text-align: left;
+            padding: 14px 18px;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid rgba(128, 208, 255, 0.3);
+        }
+        .tabela-propostas-cliente td {
+            padding: 16px 18px;
+            border-bottom: 1px solid rgba(0, 72, 135, 0.4);
+            color: #e2e8f0;
+            vertical-align: middle;
+            font-size: 14px;
+        }
+        .tabela-propostas-cliente tr:hover {
+            background: rgba(0, 48, 92, 0.3);
+        }
+        .foto-proposta {
+            width: 90px;
+            height: 65px;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 1px solid rgba(128, 208, 255, 0.3);
+        }
+        .status-badge-prop {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <!-- Cabeçalho Principal -->
+    <div class="cabecalho">
+        <header>
+            <div class="logo">
+                <a href="../index.html"><img src="../RPG.png" alt="RPG Central Logo"></a>
+            </div>
+            <div class="botoes__menu">
+                <ul>
+                    <li>
+                        <a href="Sistemas.html">Sistemas</a>
+                        <a href="Campanhas.html">Campanhas</a>
+                        <a href="Personagens.html">Personagens</a>
+                        <a href="Resumos.html">Resumos</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="login__registro">
+                <button class="entrar"><a href="Entrar.html">Entrar</a></button>
+                <button class="registrar"><a href="Registrar.html">Registrar</a></button>
+            </div>
+        </header>
+    </div>
+
+    <!-- Barra de Moedas -->
+    <div class="moedas">
+        <h1>Moedas Virtuais:</h1>
+        <div class="quantidade_moedas">
+            <span id="moedas_usuario">0.00</span>
+        </div>
+        <button class="comprar"><a href="Loja_de_moedas.html">Comprar mais moedas</a></button>
+    </div>
+
+    <!-- Conteúdo da Página: Listagem de Minhas Propostas (Requisito 7 do Edital) -->
+    <main style="max-width: 1150px; margin: 40px auto 70px auto; padding: 0 20px;">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 15px; margin-bottom: 25px;">
+            <div>
+                <h1 style="color: white; font-size: 30px; font-weight: 800; margin-bottom: 6px;">
+                    Listagem de <span style="color: #80D0FF;">Minhas Propostas</span>
+                </h1>
+                <p style="color: #cbd5e1; font-size: 15px;">Acompanhe o retorno e as respostas da administração para suas ofertas de sistemas</p>
+            </div>
+            <a href="Sistemas.html" style="padding: 10px 20px; background: #0284c7; color: white; text-decoration: none; border-radius: 8px; font-weight: bold; font-size: 14px;">
+                + Fazer Nova Proposta no Catálogo
+            </a>
+        </div>
+
+        <div id="container-propostas-tabela">
+            <p style="text-align: center; color: #80D0FF; padding: 40px; font-size: 16px;">Carregando suas propostas...</p>
+        </div>
+    </main>
+
+    <!-- Scripts -->
+    <script src="../js/api.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const usuario = await AuthService.initCliente();
+            renderizarCabecalho(usuario);
+
+            const container = document.getElementById('container-propostas-tabela');
+            if (!usuario) {
+                container.innerHTML = `
+                    <div style="text-align: center; padding: 50px 20px; background: rgba(0, 20, 45, 0.7); border-radius: 12px; border: 1px dashed rgba(128, 208, 255, 0.3);">
+                        <h3 style="color: white; margin-bottom: 12px; font-size: 20px;">Você precisa estar conectado para visualizar suas propostas</h3>
+                        <p style="color: #cbd5e1; margin-bottom: 20px; font-size: 14px;">Identifique-se com sua conta para acessar o histórico de negociações.</p>
+                        <a href="Entrar.html" style="display: inline-block; padding: 12px 28px; background: #0284c7; color: white; text-decoration: none; border-radius: 8px; font-weight: bold;">Fazer Login</a>
+                    </div>
+                `;
+                return;
+            }
+
+            try {
+                const data = await Api.get(`/api/propostas/usuario/${usuario.uuid}`);
+                const propostas = data.propostas || [];
+
+                if (propostas.length === 0) {
+                    container.innerHTML = `
+                        <div style="text-align: center; padding: 50px 20px; background: rgba(0, 20, 45, 0.7); border-radius: 12px; border: 1px dashed rgba(128, 208, 255, 0.3);">
+                            <h3 style="color: white; margin-bottom: 10px; font-size: 19px;">Nenhuma proposta encontrada</h3>
+                            <p style="color: #94a3b8; font-size: 14px; margin-bottom: 20px;">Você ainda não enviou propostas de negociação para nenhum sistema do acervo.</p>
+                            <a href="Sistemas.html" style="display: inline-block; padding: 10px 22px; background: #10b981; color: white; text-decoration: none; border-radius: 8px; font-weight: bold;">Explorar Sistemas à Venda</a>
+                        </div>
+                    `;
+                    return;
+                }
+
+                container.innerHTML = `
+                    <div style="overflow-x: auto;">
+                        <table class="tabela-propostas-cliente">
+                            <thead>
+                                <tr>
+                                    <th style="width: 23%;">SISTEMA / LIVRO</th>
+                                    <th style="width: 12%; text-align: center;">FOTO</th>
+                                    <th style="width: 32%;">PROPOSTA DO CLIENTE</th>
+                                    <th style="width: 23%;">RESPOSTA DA ADMINISTRAÇÃO</th>
+                                    <th style="width: 10%; text-align: center;">AÇÕES</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                ${propostas.map(p => {
+                                    const fp = (p.forma_pagamento || 'Moedas').toLowerCase();
+                                    let badgeForma = '<span style="background: rgba(251, 191, 36, 0.2); color: #fbbf24; border: 1px solid #fbbf24; padding: 2px 7px; border-radius: 5px; font-size: 11px; font-weight: bold; margin-left: 6px;">🪙 Moedas</span>';
+                                    let prefixo = '🪙';
+
+                                    if (fp.includes('pix')) {
+                                        badgeForma = '<span style="background: rgba(56, 189, 248, 0.2); color: #38bdf8; border: 1px solid #38bdf8; padding: 2px 7px; border-radius: 5px; font-size: 11px; font-weight: bold; margin-left: 6px;">⚡ PIX</span>';
+                                        prefixo = 'R$';
+                                    } else if (fp.includes('cart')) {
+                                        badgeForma = '<span style="background: rgba(168, 85, 247, 0.2); color: #c084fc; border: 1px solid #c084fc; padding: 2px 7px; border-radius: 5px; font-size: 11px; font-weight: bold; margin-left: 6px;">💳 Cartão</span>';
+                                        prefixo = 'R$';
+                                    } else if (fp.includes('outro') || fp.includes('negoc')) {
+                                        badgeForma = '<span style="background: rgba(148, 163, 184, 0.2); color: #cbd5e1; border: 1px solid #94a3b8; padding: 2px 7px; border-radius: 5px; font-size: 11px; font-weight: bold; margin-left: 6px;">🤝 Negociação</span>';
+                                        prefixo = 'Equiv.';
+                                    }
+
+                                    let statusCor = '#fbbf24';
+                                    let statusBg = 'rgba(251, 191, 36, 0.15)';
+                                    if (p.status.toLowerCase().includes('aceit')) {
+                                        statusCor = '#34d399';
+                                        statusBg = 'rgba(52, 211, 153, 0.15)';
+                                    } else if (p.status.toLowerCase().includes('recus') || p.status.toLowerCase().includes('rejeit')) {
+                                        statusCor = '#f87171';
+                                        statusBg = 'rgba(248, 113, 113, 0.15)';
+                                    }
+
+                                    const dataFormatada = p.data_envio ? new Date(p.data_envio).toLocaleDateString('pt-BR') : '';
+
+                                    return `
+                                        <tr>
+                                            <td>
+                                                <strong style="color: white; font-size: 16px; display: block; margin-bottom: 4px;">${p.sistema_nome}</strong>
+                                                <span style="color: #80D0FF; font-size: 13px; display: block;">${p.sistema_genero}</span>
+                                                <span style="color: #ffd700; font-weight: 700; font-size: 13px;">Preço Catálogo: 🪙 ${parseFloat(p.sistema_preco).toFixed(2)}</span>
+                                            </td>
+                                            <td style="text-align: center;">
+                                                <img src="${p.imagemcapa_link || 'https://images.unsplash.com/photo-1578632767115-351597cf2477?w=600'}" class="foto-proposta" alt="${p.sistema_nome}">
+                                            </td>
+                                            <td>
+                                                <p style="margin-bottom: 6px; font-weight: 500; line-height: 1.4; color: #f1f5f9;">"${p.proposta_texto}"</p>
+                                                <div style="font-size: 12.5px; color: #cbd5e1; display: flex; align-items: center; flex-wrap: wrap; gap: 4px;">
+                                                    <span>Oferecido: <strong style="color: #ffd700;">${prefixo} ${parseFloat(p.valor_oferecido).toFixed(2)}</strong></span>
+                                                    ${badgeForma}
+                                                    ${dataFormatada ? `<span style="color: #94a3b8; margin-left: 8px;">• Enviado em: ${dataFormatada}</span>` : ''}
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <span class="status-badge-prop" style="background: ${statusBg}; color: ${statusCor}; border: 1px solid ${statusCor}; margin-bottom: 8px;">
+                                                    ${p.status}
+                                                </span>
+                                                <div style="font-size: 13px; color: #e2e8f0; line-height: 1.35;">
+                                                    ${p.resposta_admin || 'Aguardando avaliação da administração...'}
+                                                </div>
+                                            </td>
+                                            <td style="text-align: center;">
+                                                <button onclick="excluirPropostaCliente(${p.id})" title="Excluir esta proposta" style="padding: 7px 12px; background: rgba(239, 68, 68, 0.2); border: 1px solid #ef4444; color: #fca5a5; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: bold; transition: 0.2s;" onmouseover="this.style.background='#ef4444'; this.style.color='#fff';" onmouseout="this.style.background='rgba(239, 68, 68, 0.2)'; this.style.color='#fca5a5';">
+                                                    🗑️ Excluir
+                                                </button>
+                                            </td>
+                                        </tr>
+                                    `;
+                                }).join('')}
+                            </tbody>
+                        </table>
+                    </div>
+                `;
+            } catch (err) {
+                container.innerHTML = `<p style="color: #ff6b6b; text-align: center; padding: 30px;">Erro ao carregar propostas: ${err.message}</p>`;
+            }
+        }
+
+        async function excluirPropostaCliente(id) {
+            if (!confirm('Deseja realmente excluir esta proposta?')) return;
+            try {
+                await Api.delete(`/api/propostas/${id}`);
+                alert('Proposta excluída com sucesso!');
+                carregarTabelaMinhasPropostas();
+            } catch (err) {
+                alert('Erro ao excluir proposta: ' + err.message);
+            }
+        }
+        window.excluirPropostaCliente = excluirPropostaCliente;
+    </script>
+</body>
+</html>

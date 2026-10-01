@@ -1,0 +1,216 @@
+/* style_loja_de_moedas.css - Estilo da Loja de Moedas Virtuais */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(135deg, rgb(25, 28, 29) 0%, rgb(55, 158, 236) 100%);
+    color: white;
+}
+
+.cabecalho {
+    background: linear-gradient(90deg, rgb(25, 28, 29) 0%, rgba(0, 49, 87, 1) 100%);
+    border-bottom: 1px solid rgb(0, 48, 92);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.logo img {
+    max-width: 130px;
+    height: auto;
+}
+
+.botoes__menu ul {
+    list-style: none;
+    display: flex;
+}
+
+.botoes__menu li {
+    display: flex;
+    gap: 40px;
+}
+
+.botoes__menu a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    transition: 0.3s ease;
+}
+
+header ul li a:hover,
+.botoes__menu a:hover {
+    transition: 0.5s ease;
+    transform: scale(1.1);
+    color: rgb(195, 238, 255);
+}
+
+.botoes__menu a.active {
+    color: rgb(128, 208, 255);
+}
+
+.login__registro {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.login__registro button {
+    transition: 0.3s ease;
+    padding: 0.5rem 1.2rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    background-color: rgb(146, 228, 255);
+}
+
+.login__registro button a {
+    text-decoration: none;
+    color: rgb(0, 30, 60);
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.loja-container {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 30px;
+    text-align: center;
+}
+
+.loja-banner {
+    background: linear-gradient(135deg, rgb(25, 28, 29) 0%, rgba(0, 49, 87, 0.95) 100%);
+    border: 1px solid rgb(0, 48, 92);
+    border-radius: 16px;
+    padding: 30px;
+    margin-bottom: 40px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.loja-banner h2 {
+    font-size: 32px;
+    margin-bottom: 10px;
+}
+
+.loja-banner h2 span {
+    color: #ffd700;
+}
+
+.loja-banner p {
+    color: #c3eeff;
+    font-size: 16px;
+}
+
+.saldo-destaque {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(0, 20, 40, 0.85);
+    border: 1px solid #ffd700;
+    border-radius: 30px;
+    padding: 10px 28px;
+    margin-top: 20px;
+    font-size: 18px;
+    color: white;
+}
+
+.saldo-destaque strong {
+    color: #ffd700;
+    font-size: 24px;
+}
+
+.grid-pacotes {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 25px;
+}
+
+.card-pacote {
+    background: linear-gradient(135deg, #0e1e2d 0%, #153754 100%);
+    border: 1.5px solid #004887;
+    border-radius: 16px;
+    padding: 30px 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    transition: transform 0.3s ease, border-color 0.3s ease;
+    position: relative;
+}
+
+.card-pacote:hover {
+    transform: translateY(-8px);
+    border-color: #ffd700;
+}
+
+.card-pacote.popular {
+    border-color: #ffd700;
+    background: linear-gradient(135deg, #13283c 0%, #1b4569 100%);
+}
+
+.tag-popular {
+    position: absolute;
+    top: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #ffd700;
+    color: #001e3c;
+    font-weight: bold;
+    font-size: 12px;
+    padding: 4px 14px;
+    border-radius: 20px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+.pacote-icone {
+    font-size: 48px;
+    margin-bottom: 15px;
+}
+
+.pacote-nome {
+    font-size: 20px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 8px;
+}
+
+.pacote-moedas {
+    font-size: 32px;
+    font-weight: 800;
+    color: #ffd700;
+    margin-bottom: 12px;
+}
+
+.pacote-preco {
+    font-size: 16px;
+    color: #94a3b8;
+    margin-bottom: 25px;
+}
+
+.btn-comprar-pacote {
+    background: rgb(146, 228, 255);
+    color: rgb(0, 30, 60);
+    border: none;
+    border-radius: 10px;
+    padding: 12px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.btn-comprar-pacote:hover {
+    background: rgb(195, 238, 255);
+    transform: scale(1.05);
+}

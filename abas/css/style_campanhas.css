@@ -1,0 +1,156 @@
+/* style_campanhas.css - Estilo da Gestão de Campanhas */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(135deg, rgb(25, 28, 29) 0%, rgb(55, 158, 236) 100%);
+    color: white;
+}
+
+/* Header Padrão RPG Central */
+.cabecalho {
+    background: linear-gradient(90deg, rgb(25, 28, 29) 0%, rgba(0, 49, 87, 1) 100%);
+    border-bottom: 1px solid rgb(0, 48, 92);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.logo img {
+    max-width: 130px;
+    height: auto;
+}
+
+.botoes__menu ul {
+    list-style: none;
+    display: flex;
+}
+
+.botoes__menu li {
+    display: flex;
+    gap: 40px;
+}
+
+.botoes__menu a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    transition: 0.3s ease;
+}
+
+header ul li a:hover,
+.botoes__menu a:hover {
+    transition: 0.5s ease;
+    transform: scale(1.1);
+    color: rgb(195, 238, 255);
+}
+
+.botoes__menu a.active {
+    color: rgb(128, 208, 255);
+}
+
+.login__registro {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.login__registro button {
+    transition: 0.3s ease;
+    padding: 0.5rem 1.2rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    background-color: rgb(146, 228, 255);
+}
+
+.login__registro button a {
+    text-decoration: none;
+    color: rgb(0, 30, 60);
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.campanhas-container {
+    max-width: 1250px;
+    margin: 30px auto;
+    padding: 0 30px;
+}
+
+.campanhas-topo {
+    background: linear-gradient(135deg, rgb(25, 28, 29) 0%, rgba(0, 49, 87, 0.95) 100%);
+    border: 1px solid rgb(0, 48, 92);
+    border-radius: 16px;
+    padding: 25px 30px;
+    margin-bottom: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.btn-nova-campanha {
+    background: #0284c7;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 12px 24px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.3s ease;
+}
+
+.btn-nova-campanha:hover {
+    background: #0369a1;
+    transform: scale(1.04);
+}
+
+.grid-campanhas {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 25px;
+}
+
+.card-campanha {
+    background: linear-gradient(135deg, rgba(25, 28, 29, 0.95) 0%, rgba(0, 49, 87, 0.9) 100%);
+    border: 1px solid rgb(0, 48, 92);
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+    display: flex;
+    flex-direction: column;
+    transition: 0.3s ease;
+}
+
+.card-campanha:hover {
+    border-color: #80D0FF;
+    transform: translateY(-4px);
+}
+
+.campanha-capa {
+    height: 180px;
+    width: 100%;
+    object-fit: cover;
+}
+
+.campanha-corpo {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    justify-content: space-between;
+}

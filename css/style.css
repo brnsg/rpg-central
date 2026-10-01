@@ -1,0 +1,318 @@
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    width: 100%;
+    min-height: 100vh;
+    background: linear-gradient(135deg, rgb(25, 28, 29) 0%, rgb(55, 158, 236) 100%);
+    ;
+}
+
+/* Header Padrão RPG Central */
+.cabecalho {
+    background: linear-gradient(90deg, rgb(25, 28, 29) 0%, rgba(0, 49, 87, 1) 100%);
+    border-bottom: 1px solid rgb(0, 48, 92);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 40px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.logo img {
+    max-width: 130px;
+    height: auto;
+}
+
+.botoes__menu ul {
+    list-style: none;
+    display: flex;
+}
+
+.botoes__menu li {
+    display: flex;
+    gap: 40px;
+}
+
+.botoes__menu a {
+    text-decoration: none;
+    color: white;
+    font-size: 18px;
+    transition: 0.3s ease;
+}
+
+header ul li a:hover,
+.botoes__menu a:hover {
+    transition: 0.5s ease;
+    transform: scale(1.1);
+    color: rgb(195, 238, 255);
+}
+
+.botoes__menu a.active {
+    color: rgb(128, 208, 255);
+}
+
+.login__registro {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.login__registro button {
+    transition: 0.3s ease;
+    padding: 0;
+    cursor: pointer;
+    border: none;
+    border-radius: 8px;
+    background-color: rgb(146, 228, 255);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login__registro button a {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.5rem 1.2rem;
+    text-decoration: none;
+    color: rgb(0, 30, 60);
+    font-size: 15px;
+    font-weight: 600;
+    width: 100%;
+    height: 100%;
+}
+
+.login__registro button:hover {
+    transform: scale(1.08);
+    background-color: rgb(195, 238, 255);
+}
+
+/* Moedas (Desativado temporariamente - reativar com display: flex) */
+.moedas {
+    display: none;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    max-width: fit-content;
+    margin: 10px auto 35px auto;
+    padding: 0.8rem 1.8rem;
+    background: linear-gradient(135deg, rgb(25, 28, 29) 0%, rgba(0, 49, 87, 0.95) 100%);
+    border: 1px solid rgb(0, 48, 92);
+    border-radius: 14px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.moedas h1 {
+    font-size: 18px;
+    color: #80D0FF;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+}
+
+.quantidade_moedas {
+    background: rgba(25, 28, 29, 0.8);
+    border: 1px solid rgba(146, 228, 255, 0.3);
+    border-radius: 8px;
+    padding: 0.3rem 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quantidade_moedas #moedas_usuario {
+    font-size: 18px;
+    font-weight: bold;
+    color: #FFD700;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+}
+
+.moedas .comprar {
+    transition: 0.4s ease;
+    padding: 0.6rem 1.2rem;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    background-color: rgb(146, 228, 255);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.moedas .comprar a {
+    text-decoration: none;
+    color: rgb(0, 30, 60);
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.moedas .comprar:hover {
+    transform: scale(1.08);
+    background-color: rgb(195, 238, 255);
+    box-shadow: 0 6px 18px rgba(0, 45, 128, 0.35);
+}
+
+.moedas .comprar:hover a {
+    color: rgb(0, 45, 128);
+}
+
+/* Mensagem de Boas-vindas */
+.mensagemdeboasvindas {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background: linear-gradient(135deg, rgb(25, 28, 29) 0%, rgba(0, 49, 87, 0.95) 100%);
+    border: 1px solid rgb(0, 48, 92);
+    border-radius: 16px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    max-width: 800px;
+    margin: 40px auto 25px auto;
+    padding: 40px 30px;
+    gap: 15px;
+}
+
+#titulo {
+    font-size: 32px;
+    color: white;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+#titulo span {
+    color: #80D0FF;
+    text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+
+#subtitulo {
+    font-size: 18px;
+    color: rgb(195, 238, 255);
+    font-weight: 400;
+    margin-bottom: 8px;
+}
+
+.boasvindas__botoes {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    margin-top: 5px;
+}
+
+.mensagemdeboasvindas button {
+    background-color: rgb(146, 228, 255);
+    border: none;
+    border-radius: 10px;
+    transition: 0.4s ease;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.mensagemdeboasvindas button:hover {
+    transform: scale(1.1);
+    background-color: rgb(195, 238, 255);
+    box-shadow: 0 6px 18px rgba(0, 45, 128, 0.35);
+}
+
+.mensagemdeboasvindas button a {
+    display: block;
+    padding: 0.75rem 2rem;
+    text-decoration: none;
+    color: rgb(0, 30, 60);
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.mensagemdeboasvindas button:hover a {
+    color: rgb(0, 45, 128);
+}
+
+.secao__logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0.5rem;
+}
+
+.logo__text {}
+
+.logo__text img {
+    max-width: 100%;
+    height: auto;
+}
+
+/* Secão Principal */
+.secao__rolagemdedados {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+/* Rolagem de Dados */
+.rolagemdedados__botoes {
+    display: flex;
+    gap: 50px;
+    margin-bottom: 1.5rem;
+}
+
+.rolagemdedados__botoes button {
+    background: rgb(195, 238, 255);
+    border: none;
+    border-radius: 10px;
+    transition: 0.5s ease;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+}
+
+.rolagemdedados__botoes button:hover {
+    background: rgb(195, 238, 255);
+    border: none;
+    transform: scale(1.2);
+    transition: 0.5s ease;
+    border-radius: 10px;
+    padding: 1rem 2rem;
+    cursor: pointer;
+}
+
+.rolagemdedados__botoes button a {
+    font-size: 20px;
+    text-decoration: none;
+    color: rgb(0, 56, 112);
+}
+
+.d20 {}
+
+.d12 {}
+
+.d10 {}
+
+.d8 {}
+
+.d6 {}
+
+.d4 {}
+
+/* Display dos Resultados */
+.rolagemdedados__display {
+    text-align: center;
+}
+
+#resultado {
+    margin-bottom: 2rem;
+    font-size: 20px;
+    color: white;
+
+}
+
+#resultado_numero {}

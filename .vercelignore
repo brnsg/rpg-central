@@ -1,0 +1,6 @@
+node_modules
+.env
+.git
+*.bat
+Arquivos Desnecessários/
+Credenciais_Admin.txt
